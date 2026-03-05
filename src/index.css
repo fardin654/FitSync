@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-base: #0F172A; /* Slate 900 for modern dark base */
+  --color-neon-blue: #38BDF8; /* Sky 400 */
+  --color-neon-green: #4ADE80; /* Green 400 */
+  --color-panel-bg: rgba(30, 41, 59, 0.7); /* Slate 800 with opacity for glassmorphism */
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-dark-base text-gray-100 font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.05), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(74, 222, 128, 0.05), transparent 25%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-panel-bg backdrop-blur-md border border-slate-700/50 rounded-2xl shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-neon-blue text-slate-900 font-bold rounded-xl shadow-[0_0_15px_rgba(56,189,248,0.4)]
+           hover:shadow-[0_0_25px_rgba(56,189,248,0.6)] hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .btn-success {
+    @apply px-6 py-3 bg-neon-green text-slate-900 font-bold rounded-xl shadow-[0_0_15px_rgba(74,222,128,0.4)]
+           hover:shadow-[0_0_25px_rgba(74,222,128,0.6)] hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .nav-link {
+    @apply text-slate-400 hover:text-neon-blue transition-colors duration-200;
+  }
+}
