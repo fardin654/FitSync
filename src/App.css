@@ -5,6 +5,31 @@
   text-align: center;
 }
 
+/* Scrollbar styling for days container */
+.days-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #475569 #1e293b;
+}
+
+.days-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.days-scrollbar::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 10px;
+}
+
+.days-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 10px;
+  border: 2px solid #0f172a;
+}
+
+.days-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
