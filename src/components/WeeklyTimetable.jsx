@@ -199,7 +199,7 @@ const WeeklyTimetable = () => {
                     <Check className="w-4 h-4 mr-1" /> Saving to Cloud...
                 </div>
             )}
-            <div className="flex justify-between items-center mb-6 overflow-x-auto pb-2">
+            <div className="flex justify-between items-center mb-6 overflow-x-hidden">
                 {days.map(day => (
                     <button
                         key={day}
@@ -290,7 +290,7 @@ const WeeklyTimetable = () => {
                                     <span className="font-semibold tracking-wide">
                                         {exercise}
                                         {(!exercise.includes('Rest') && exercise !== 'Cardio' && prs[exercise]) && (
-                                            <span className="ml-2 text-neon-blue font-bold"> - {prs[exercise]} lbs</span>
+                                            <span className="ml-2 text-neon-blue font-bold"> - {prs[exercise]} kgs</span>
                                         )}
                                     </span>
                                     {(!exercise.includes('Rest') && exercise !== 'Cardio') &&
@@ -313,54 +313,61 @@ const WeeklyTimetable = () => {
                             <p className="text-slate-400 max-w-xs leading-relaxed">Modify your {activeDay} schedule carefully. Changes will be synced across all devices.</p>
                         </div>
                     ) : selectedExercise ? (
-                        <div className="text-center animate-in fade-in slide-in-from-bottom-4 duration-500 p-8 relative z-10 w-full h-full flex flex-col items-center justify-center">
+                            <div className="text-center animate-in fade-in slide-in-from-bottom-4 duration-500 p-8 relative z-10 w-full h-full flex flex-col items-center justify-center">
 
-                            <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-500 mb-3">Target Objective</h4>
-                            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mb-8 drop-shadow-md">
-                                {selectedExercise}
-                            </h2>
+                                <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-500 mb-3">Target Objective</h4>
+                                <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mb-8 drop-shadow-md">
+                                    {selectedExercise}
+                                </h2>
 
-                            {isEditingPr ? (
-                                <div className="flex flex-col items-center justify-center space-y-4 mb-4">
-                                    <div className="flex items-center space-x-3">
-                                        <input
-                                            type="number"
-                                            className="w-32 text-center bg-slate-900/80 text-white font-black text-4xl py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue border border-neon-blue/50 shadow-[0_0_15px_rgba(56,189,248,0.2)]"
-                                            value={editPrValue}
-                                            onChange={(e) => setEditPrValue(e.target.value)}
-                                            autoFocus
-                                            onKeyDown={(e) => e.key === 'Enter' && savePr()}
-                                        />
-                                        <span className="text-xl font-bold text-slate-500">lbs</span>
-                                    </div>
-                                    <div className="flex space-x-2">
-                                        <button onClick={savePr} className="px-6 py-2 bg-neon-green/20 text-neon-green font-bold rounded-lg hover:bg-neon-green hover:text-slate-900 transition-all">Save</button>
-                                        <button onClick={() => setIsEditingPr(false)} className="px-6 py-2 bg-slate-800 text-slate-400 font-bold rounded-lg hover:bg-slate-700 transition-all">Cancel</button>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="group relative cursor-pointer" onClick={() => {
-                                    setEditPrValue(prs[selectedExercise] ? prs[selectedExercise].toString() : "0");
-                                    setIsEditingPr(true);
-                                }}>
-
-                                    <div className="inline-flex items-baseline px-8 py-5 bg-slate-900/80 rounded-3xl border border-slate-700 shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] group-hover:border-neon-blue/50 group-hover:shadow-[0_0_20px_rgba(56,189,248,0.15)] transition-all duration-300 w-48 justify-center relative">
-                                        <span className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400">
-                                            {prs[selectedExercise] || "0"}
-                                        </span>
-                                        <span className="text-xl font-bold text-slate-500 ml-2">lbs</span>
-
-                                        <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                                            <Edit2 className="w-4 h-4 text-neon-blue" />
+                                {isEditingPr ? (
+                                    // EDIT MODE
+                                    <div className="flex flex-col items-center w-full max-w-xs">
+                                        {/* Input Box shaped identically to Display Box */}
+                                        <div className="inline-flex items-baseline px-8 py-5 bg-slate-900/80 rounded-3xl border border-neon-blue/50 shadow-[0_0_20px_rgba(56,189,248,0.15)] transition-all duration-300 w-48 justify-center relative">
+                                            <input    
+                                                type="number"
+                                                className="w-24 text-center bg-transparent text-white font-black text-4xl p-0 focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                value={editPrValue}
+                                                onChange={(e) => setEditPrValue(e.target.value)}
+                                                autoFocus
+                                                onKeyDown={(e) => e.key === 'Enter' && savePr()}
+                                            />
+                                            <span className="text-xl font-bold text-slate-500 ml-2">kgs</span>
+                                        </div>
+                                        
+                                        {/* Buttons placed in the exact same footprint as the view-mode text */}
+                                        <div className="mt-8 pt-6 border-t border-slate-800/50 w-full flex justify-center space-x-2 min-h-[72px] items-center"> 
+                                            <button onClick={savePr} className="px-6 py-2 bg-neon-green/20 text-neon-green font-bold rounded-lg hover:bg-neon-green hover:text-slate-900 transition-all">Save</button>
+                                            <button onClick={() => setIsEditingPr(false)} className="px-6 py-2 bg-slate-800 text-slate-400 font-bold rounded-lg hover:bg-slate-700 transition-all">Cancel</button>
                                         </div>
                                     </div>
-                                </div>
-                            )}
+                                ) : (
+                                    // VIEW MODE
+                                    <div className="group relative cursor-pointer flex flex-col items-center w-full max-w-xs" onClick={() => {
+                                        setEditPrValue(prs[selectedExercise] ? prs[selectedExercise].toString() : "0");
+                                        setIsEditingPr(true);
+                                    }}>
+                                        {/* Display Box */}
+                                        <div className="inline-flex items-baseline px-8 py-5 bg-slate-900/80 rounded-3xl border border-slate-700 shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] group-hover:border-neon-blue/50 group-hover:shadow-[0_0_20px_rgba(56,189,248,0.15)] transition-all duration-300 w-48 justify-center relative">
+                                            <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400">
+                                                {prs[selectedExercise] || "0"}
+                                            </span>
+                                            <span className="text-xl font-bold text-slate-500 ml-2">kgs</span>
 
-                            <div className="mt-8 pt-6 border-t border-slate-800/50 w-full max-w-xs">
-                                <p className="text-sm text-slate-400 font-medium">Click the weight above to update your Max Capacity constraint.</p>
+                                            <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                                                <Edit2 className="w-4 h-4 text-neon-blue" />
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Text placed in the exact same footprint as the edit-mode buttons */}
+                                        <div className="mt-8 pt-6 border-t border-slate-800/50 w-full min-h-[72px] flex items-center justify-center">
+                                            <p className="text-sm text-slate-400 font-medium leading-tight">Click the weight above to update your Max Capacity constraint.</p>
+                                        </div>
+                                    </div>
+                                )}
+
                             </div>
-                        </div>
                     ) : (
                         <div className="text-center text-slate-500 p-8 flex flex-col items-center justify-center h-full">
                             <div className="w-16 h-16 rounded-full bg-slate-800/30 flex items-center justify-center mb-6">

@@ -85,15 +85,15 @@ const Dashboard = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="glass-panel p-4 flex flex-col justify-center items-center border-neon-blue/20">
                             <span className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Top Bench</span>
-                            <span className="text-3xl font-black text-neon-blue">{topBench} <span className="text-lg font-normal text-slate-500">lbs</span></span>
+                            <span className="text-3xl font-black text-neon-blue">{topBench} <span className="text-lg font-normal text-slate-500">kgs</span></span>
                         </div>
                         <div className="glass-panel p-4 flex flex-col justify-center items-center border-neon-green/20">
                             <span className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Top Squat</span>
-                            <span className="text-3xl font-black text-neon-green">{topSquat} <span className="text-lg font-normal text-slate-500">lbs</span></span>
+                            <span className="text-3xl font-black text-neon-green">{topSquat} <span className="text-lg font-normal text-slate-500">kgs</span></span>
                         </div>
                         <div className="glass-panel p-4 flex flex-col justify-center items-center border-indigo-400/20">
                             <span className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Top Deadlift</span>
-                            <span className="text-3xl font-black text-indigo-400">{topDeadlift} <span className="text-lg font-normal text-slate-500">lbs</span></span>
+                            <span className="text-3xl font-black text-indigo-400">{topDeadlift} <span className="text-lg font-normal text-slate-500">kgs</span></span>
                         </div>
                     </div>
                 </div>
